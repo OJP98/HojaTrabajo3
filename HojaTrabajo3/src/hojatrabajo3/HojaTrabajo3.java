@@ -12,6 +12,9 @@ public class HojaTrabajo3 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        GRandom prueba = new GRandom();
+        prueba.Escribir("datos.txt");
+        
     }
     
 }
