@@ -5,15 +5,19 @@
  */
 package hojatrabajo3;
 
-public class HojaTrabajo3 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+public class HojaTrabajo3 {    
+    
+    public static void main(String[] args) {                
+        
+        String numDesord;
+        
         GRandom prueba = new GRandom();
-        prueba.Escribir("datos.txt");
+//        prueba.Escribir("numerosDesordenados.txt");
+        
+        numDesord = prueba.leerArchivo("numerosDesordenados.txt");        
+        
+        System.out.println("Los elementos existentes en el arraylist son:");
+        System.out.println(numDesord);
         
     }
     
