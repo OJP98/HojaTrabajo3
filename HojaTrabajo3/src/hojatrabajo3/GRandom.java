@@ -13,7 +13,7 @@ public class GRandom {
     
     ArrayList<Integer> listaDesord = new ArrayList<Integer>();
     ArrayList<Integer> reareglo = new ArrayList<>();
-    int[] listaD = new int[3000];    
+    int[] listaD = new int[1500];    
    
     /**
      * Esta clase random va a generar los random y luego guardarlos en el que dice
@@ -38,8 +38,8 @@ public class GRandom {
             bw = new BufferedWriter(w);
             wr = new PrintWriter(bw);            
             
-            for (int i =0; i<3000; i++){
-		x = rnd.nextInt(5000-0)+0; 
+            for (int i =0; i<1500; i++){
+		x = rnd.nextInt(1500-0)+0; 
                 wr.println(x);
 		System.out.println(x);
             }
@@ -332,11 +332,7 @@ public class GRandom {
         }
         i++;
     }
-    
-        System.out.println("Con cocktail:\n");
-        for (int k = 0; k < lista.length; k++) {
-            System.out.print(lista[k] + ", ");
-        }
+
         return lista;
     }
     
@@ -373,11 +369,6 @@ public class GRandom {
             }
             lista = auxiliar;
             listaOrdenada=lista;
-        }
-     
-        System.out.println("La lista ordenada con Radix:\n");
-        for (int k = 0; k < lista.length; k++) {
-            System.out.print(lista[k] + ", ");
         }
         return listaOrdenada;
     }
