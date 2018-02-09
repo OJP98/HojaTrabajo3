@@ -355,6 +355,7 @@ public class GRandom {
         //Otro metodo de Ratix
         //int m=10;
         //int n=1;
+        
         int listaOrdenada[] = new int[lista.length];
         for (x=Integer.SIZE-1; x>=0;x--){
             int auxiliar[] = new int[lista.length];
