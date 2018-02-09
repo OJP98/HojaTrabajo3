@@ -48,13 +48,11 @@ public class CocktailSort {
                 //En este segmento ocurre el intercambio de lugar solo si el elemento
                 //Es mayor al que le sigue, para asi insertarlo al final de la lista
                 int temp = lista.get(k);
-                
-                lista.set(k, lista.get(k+1));
-                lista.set(k+1,temp);
+                int post = lista.get(k+1);
+                lista.set(temp, post);
                 ordenado = true;
             }
            }
-    
             j--;
         if(ordenado)
         {
@@ -62,10 +60,10 @@ public class CocktailSort {
         
         for(int k=j;k>i; k--){
             //Para el recorrido descendente en el cual busca el menor numero y lo coloca a la izquierda
-            if(lista.get(i)<lista.get(i-1)){
+            if(lista.get(k)<lista.get(k-1)){
                 int temp = lista.get(k);
-                lista.set(k, lista.get(k-1));
-                lista.set(k-1,temp);
+                int pre = lista.get(k-1);
+                lista.set(pre,temp);
                 ordenado = true;
             }
         }
