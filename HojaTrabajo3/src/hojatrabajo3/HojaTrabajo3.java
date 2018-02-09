@@ -9,15 +9,44 @@ public class HojaTrabajo3 {
     
     public static void main(String[] args) {                
         
-        String numDesord;
+        int[] numDesord;
+        int[] ordGnomeSort;
+        int[] ordQuickSort;
+        int[] ordMergeSort;
+        int[] ordCocktailSort;
         
         GRandom prueba = new GRandom();
 //        prueba.Escribir("numerosDesordenados.txt");
         
         numDesord = prueba.leerArchivo("numerosDesordenados.txt");        
         
-        System.out.println("Los elementos existentes en el arraylist son:");
-        System.out.println(numDesord);
+        System.out.println("Los elementos existentes en el array son:");
+        for (int i = 0; i < numDesord.length; i++) {
+            
+            System.out.print(numDesord[i] + ", ");
+            
+        }
+        
+        System.out.println("\n\n____________________________________________________\n\n");
+
+        ordGnomeSort = prueba.GnomeSort(numDesord);
+        prueba.imprimirLista(ordGnomeSort, "GnomeSort");
+        
+        System.out.println("\n\n____________________________________________________\n\n");
+
+        ordQuickSort = prueba.Quicksort(numDesord);        
+        prueba.imprimirLista(ordQuickSort, "QuickSort");
+        
+        System.out.println("\n\n____________________________________________________\n\n");
+
+        ordMergeSort = prueba.Mergesort(numDesord);  
+        prueba.imprimirLista(ordMergeSort, "MergeSort");
+        
+        System.out.println("\n\n____________________________________________________\n\n");
+        prueba.ordenadoCocktail();
+        
+        System.out.println("\n\n____________________________________________________\n\n");
+        prueba.radixSort();
         
     }
     

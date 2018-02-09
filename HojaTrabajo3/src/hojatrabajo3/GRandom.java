@@ -12,14 +12,13 @@ import java.util.ArrayList;
 public class GRandom {
     
     ArrayList<Integer> listaDesord = new ArrayList<Integer>();
-    ArrayList<Integer> listaOrd = new ArrayList<Integer>();
+    ArrayList<Integer> reareglo = new ArrayList<>();
+    int[] listaD = new int[3000];    
    
     /**
      * Esta clase random va a generar los random y luego guardarlos en el que dice
      * Default Package que tiene un txt llamado datos que luego leera para ordenarlo.
-    */
-    
-    String saltoLinea = System.getProperty("line.separator");
+    */        
     
     public void Escribir(String nombre) {
      //Seccion de definiciones para random
@@ -37,9 +36,7 @@ public class GRandom {
             f = new File(nombre);
             w = new FileWriter(f);
             bw = new BufferedWriter(w);
-            wr = new PrintWriter(bw);
-            
-//            wr.println("Los valores random son:");
+            wr = new PrintWriter(bw);            
             
             for (int i =0; i<3000; i++){
 		x = rnd.nextInt(5000-0)+0; 
@@ -64,7 +61,7 @@ public class GRandom {
      * @param numerosDesord: El archivo txt con los numeros
      * @return
      */
-    public String leerArchivo(String numerosDesord){                
+    public int[] leerArchivo(String numerosDesord){                
         
         String numeros = "";
         
@@ -82,8 +79,12 @@ public class GRandom {
             
             while( (linea=br.readLine()) != null) {
                 
-                listaDesord.add(Integer.parseInt(linea));
+                listaDesord.add(Integer.parseInt(linea));                                
                 
+            }
+            
+            for (int i = 0; i < listaD.length; i++) {
+                listaD[i] = listaDesord.get(i).intValue();
             }
             
             br.close();
@@ -101,9 +102,281 @@ public class GRandom {
             numeros = (numeros + listaDesord.get(i) + ", ");
         }
         
-        return numeros;
+        return listaD;
         
     }
         
+    /**
+     * Metodo que ordena la lista de enteros de la forma Gnome.
+     */
+    public int[] GnomeSort (int[] lista){                
+        
+        int valorTemp = 0;
+        
+        for (int i = 1; i < lista.length;) {
+            
+            if (lista[i-1] <= lista[i]) {
+                
+                i++;
+                
+            } else {
+                
+                valorTemp = lista[i];
+                
+                lista[i] = lista[i-1];                
+                lista[i-1] = valorTemp;                                
+                --i;
+                
+                if (i==0) {
+                    i=1;
+                }                
+            }            
+        }
+                
+        return lista;
+        
+    }
+    
+    /**
+     * Metodo que ordena la cadena de datos mediante el metodo Quicksort.
+     */
+    public int[] Quicksort (int[] lista){                
+        
+        int valorIzq = 0;
+        int valorDer = lista[0];        
+        
+        if (valorIzq>=valorDer) {
+            return lista;
+        }
+        
+        if (valorIzq != valorDer) {
+            
+            int pivote = valorIzq;
+            int valorTemp;
+            
+            while (valorIzq != valorDer) {                               
+                
+                while( lista[valorDer] >= lista[valorIzq] && valorIzq < valorDer){
+                    valorDer--;                
+                }
+                
+                while (lista[valorIzq] < lista[pivote] && valorIzq < valorDer) {
+                    valorIzq++;
+                }
+                
+                if (valorDer != valorIzq) {
+
+                    valorTemp = lista[valorDer];
+                    lista[valorDer] = lista[valorIzq];
+                    lista[valorIzq] = valorTemp;                    
+                }                          
+            }                                                
+        }       
+        
+        return lista;
+    }
+    
+    /**
+     * Metodo que une a los arrays creados en el MergeSort.
+     * @param izquierda: El array del lado izquierdo.
+     * @param derecha: El array del lado derecho.
+     * @return: El array izquierdo y derecho unidos.
+     */
+    public int[] Merge(int[] izquierda, int[] derecha){
+        
+        int largoTotal = izquierda.length + derecha.length;
+        int [] resultado = new int [largoTotal];
+        int iD = 0;
+        int iI = 0;
+        int iR = 0;
+        
+     while (iI < izquierda.length || iD < derecha.length) {         
+         
+         if (iI < izquierda.length && iD < derecha.length) {
+                          
+             if (izquierda[iI] <= derecha[iD]) {
+                 
+                 resultado [iR] = izquierda[iI];
+                 iI++;
+                 iR++;
+                 
+             } else {
+                 
+                 resultado[iR] = derecha[iD];
+                 iD++;
+                 iR++;
+                 
+             }
+             
+         } else if (iI < izquierda.length){
+             
+             resultado [iR] = izquierda[iI];
+             iI++;
+             iR++;
+             
+         } else if (iD < derecha.length) {
+             
+             resultado [iD] = derecha.length;
+             iD++;
+             iR++;
+             
+         }                  
+         
+     }   
+     
+     return resultado;
+        
+    }
+    
+    /**
+     * Metodo que realiza el ordenamiento mediante sorteo de listas.
+     * @param lista: La lista a ordenar.
+     * @return: La lista sorteada.
+     */
+    public int[] Mergesort(int[] lista){                           
+        
+        if (lista.length <= 1) {
+            
+            return lista;
+            
+        }
+        
+        //Variable que tiene como significado "Punto Medio"
+        int PM = lista.length/2;
+        
+        int[] izq = new int [PM];
+        int[] derecha;
+        int[] resultado = new int [lista.length];
+        
+        if (lista.length %2 == 0 ){
+            
+            derecha = new int [PM];
+            
+        } else {
+            
+            derecha = new int [PM + 1];
+        }                
+        
+        for (int i = 0; i < PM; i++) { 
+            
+            izq[i] = (int) lista[i];          
+            
+        }    
+                        
+        for (int j = 0; j < derecha.length; j++) {            
+                                        
+            derecha[j] = lista[j+PM];                                        
+            
+        }
+
+        izq = Mergesort(izq);
+        derecha = Mergesort(derecha);
+        
+        resultado = Merge(izq, derecha);
+     
+         return lista
+;        
+    }  
+    
+    public void imprimirLista(int[] lista , String metodo) {
+        
+        System.out.println("La lista ordenada con " + metodo + " es:\n");
+        for (int i = 0; i < lista.length; i++) {            
+            System.out.print(lista[i] + ", ");
+        }
+        
+    }
+    
+    public void ordenadoCocktail(){        
+    
+    ArrayList<Integer> lista = listaDesord;
+        
+    boolean ordenado = true;
+    int i =0;
+    int j = lista.size()-1;
+    
+    while (i<j && ordenado ){
+    //Mientras no este ordenado
+        ordenado = false;
+        for (int k=i;k<j;k++){
+            //Para recorrer de forma ascendente la lista buscando el mayor
+            if(lista.get(i)>lista.get(i+1)){
+                //En este segmento ocurre el intercambio de lugar solo si el elemento
+                //Es mayor al que le sigue, para asi insertarlo al final de la lista
+                int temp = lista.get(k);
+                int post = lista.get(k+1);
+                lista.set(temp, post);
+                ordenado = true;
+            }
+           }
+            j--;
+        if(ordenado)
+        {
+            ordenado = false;
+        
+        for(int k=j;k>i; k--){
+            //Para el recorrido descendente en el cual busca el menor numero y lo coloca a la izquierda
+            if(lista.get(k)<lista.get(k-1)){
+                int temp = lista.get(k);
+                int pre = lista.get(k-1);
+                lista.set(pre,temp);
+                ordenado = true;
+            }
+        }
+        }
+        i++;
+    }
+    
+        System.out.println("Con cocktail:\n");
+        for (int k = 0; k < lista.size(); k++) {
+            System.out.print(lista.get(k) + ", ");
+        }
+    
+    }
+    
+    public void radixSort(){
+        
+        ArrayList<Integer> lista = listaDesord;        
+        
+        //Se necesitan en teoria 10 listas, una lista para cada digito y la
+        //lista que mezcla todos los digitos ya ordenados por digito.
+        int x;
+        int i;
+        //Otro metodo de Ratix
+        //int m=10;
+        //int n=1;
+        
+        for (x=Integer.SIZE-1; x>=0;x--){
+            
+            int j=0;
+            //int dividido = lista.get(x)/n;
+            //n=n*10;
+            for (i=0;i<lista.size();i++){
+                boolean mover = lista.get(i)<< x>=0;
+                
+            //Operador Ternario (funciona como una condicion entre valores evaluados)
+            if(x==0 ? !mover:mover){
+                
+                reareglo.add(j, lista.get(i)); 
+                j++;
+            }else{
+                reareglo.add(i-j,lista.get(i));
+                
+            }
+            }
+            for (i=j;i<reareglo.size();i++){
+                reareglo.add(i, lista.get(i-j));
+            }
+            lista = reareglo;
+        }
+     
+        System.out.println("Con cocktail:\n");
+        for (int k = 0; k < lista.size(); k++) {
+            System.out.print(lista.get(k) + ", ");
+        }
+        
+    }
+    
+    
 }
 
