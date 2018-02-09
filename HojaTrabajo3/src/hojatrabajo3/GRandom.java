@@ -68,7 +68,8 @@ public class GRandom {
         File f;
         FileReader fr;
         BufferedReader br;
-        
+        //En esta seccion va a procurar leer el archivo de numeros y convertirlos
+        //A enteros al mismo tiempo para guardarlos en el ArrayList de los datos
         try {
             
             f = new File (numerosDesord);
@@ -90,7 +91,11 @@ public class GRandom {
             br.close();
             fr.close();
                         
-        } catch (Exception e) {
+        }
+        //En caso detecta algo que no es un numero convertible a entero
+        //Aunque con el generador no deberia haber problema pero si en el 
+        //Archivo de texto si se hace modifiaciones manuales por prevencion
+        catch (Exception e) {
             
             System.err.println("Se produjo un error: " + e);
             
