@@ -22,7 +22,7 @@ public class Radix {
         //int m=10;
         //int n=1;
         
-        for (x=Integer.SIZE-1; x>=0;x++){
+        for (x=Integer.SIZE-1; x>=0;x--){
             
             int j=0;
             //int dividido = lista.get(x)/n;
