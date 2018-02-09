@@ -17,7 +17,7 @@ public class HojaTrabajo3 {
         int[] ordCocktailSort;
         
         GRandom prueba = new GRandom();
-//        prueba.Escribir("numerosDesordenados.txt");
+        prueba.Escribir("numerosDesordenados.txt");
         
         numDesord = prueba.leerArchivo("numerosDesordenados.txt");        
         
@@ -34,13 +34,13 @@ public class HojaTrabajo3 {
         prueba.imprimirLista(ordGnomeSort, "GnomeSort");
         
         System.out.println("\n\n____________________________________________________\n\n");
-
-        ordQuickSort = prueba.Quicksort(numDesord);        
+     
+        ordQuickSort = prueba.Quicksort(numDesord);
         prueba.imprimirLista(ordQuickSort, "QuickSort");
         
         System.out.println("\n\n____________________________________________________\n\n");
 
-        ordMergeSort = prueba.Mergesort(numDesord);  
+        ordMergeSort = prueba.Mergesort(numDesord); 
         prueba.imprimirLista(ordMergeSort, "MergeSort");
         
         System.out.println("\n\n____________________________________________________\n\n");
