@@ -13,6 +13,7 @@ public class HojaTrabajo3 {
         int[] ordGnomeSort;
         int[] ordQuickSort;
         int[] ordMergeSort;
+        int[] ordRadixSort;
         int[] ordCocktailSort;
         
         GRandom prueba = new GRandom();
@@ -43,10 +44,12 @@ public class HojaTrabajo3 {
         prueba.imprimirLista(ordMergeSort, "MergeSort");
         
         System.out.println("\n\n____________________________________________________\n\n");
-        prueba.ordenadoCocktail();
+        ordCocktailSort = prueba.ordenadoCocktail(numDesord);
+        prueba.imprimirLista(ordCocktailSort, "Cocktail Sort");
         
         System.out.println("\n\n____________________________________________________\n\n");
-        prueba.radixSort();
+        ordRadixSort = prueba.radixSort(numDesord);
+        prueba.imprimirLista(ordRadixSort, "RadixSort");
         
     }
     

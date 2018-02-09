@@ -287,25 +287,28 @@ public class GRandom {
         
     }
     
-    public void ordenadoCocktail(){        
+    public int[] ordenadoCocktail(int[] lista){        
     
-    ArrayList<Integer> lista = listaDesord;
+    //ArrayList<Integer> lista = listaDesord;
         
     boolean ordenado = true;
     int i =0;
-    int j = lista.size()-1;
+    int j = lista.length-1;
     
     while (i<j && ordenado ){
     //Mientras no este ordenado
         ordenado = false;
         for (int k=i;k<j;k++){
             //Para recorrer de forma ascendente la lista buscando el mayor
-            if(lista.get(i)>lista.get(i+1)){
+            if(lista[i]>lista[i+1]){
                 //En este segmento ocurre el intercambio de lugar solo si el elemento
                 //Es mayor al que le sigue, para asi insertarlo al final de la lista
-                int temp = lista.get(k);
-                int post = lista.get(k+1);
-                lista.set(temp, post);
+                //int temp = lista.get(k);
+                //int post = lista.get(k+1);
+                //lista.set(temp, post);
+                int temp = lista[k];
+                lista[k] = lista [k-1];
+                lista [k-1] =temp;
                 ordenado = true;
             }
            }
@@ -316,10 +319,13 @@ public class GRandom {
         
         for(int k=j;k>i; k--){
             //Para el recorrido descendente en el cual busca el menor numero y lo coloca a la izquierda
-            if(lista.get(k)<lista.get(k-1)){
-                int temp = lista.get(k);
-                int pre = lista.get(k-1);
-                lista.set(pre,temp);
+            if(lista[k]<lista[k-1]){
+                //int temp = lista.get(k);
+                //int pre = lista.get(k-1);
+                //lista.set(pre,temp);
+                int temp = lista[k];
+                lista[k] = lista[k-1];
+                lista[k-1] = temp;
                 ordenado = true;
             }
         }
@@ -328,53 +334,52 @@ public class GRandom {
     }
     
         System.out.println("Con cocktail:\n");
-        for (int k = 0; k < lista.size(); k++) {
-            System.out.print(lista.get(k) + ", ");
+        for (int k = 0; k < lista.length; k++) {
+            System.out.print(lista[k] + ", ");
         }
-    
+        return lista;
     }
     
-    public void radixSort(){
-        
-        ArrayList<Integer> lista = listaDesord;        
-        
+    public int[] radixSort(int[] lista){
+            
         //Se necesitan en teoria 10 listas, una lista para cada digito y la
         //lista que mezcla todos los digitos ya ordenados por digito.
         int x;
         int i;
+        int j;
         //Otro metodo de Ratix
         //int m=10;
         //int n=1;
-        
+        int listaOrdenada[] = new int[lista.length];
         for (x=Integer.SIZE-1; x>=0;x--){
-            
-            int j=0;
+            int auxiliar[] = new int[lista.length];
             //int dividido = lista.get(x)/n;
             //n=n*10;
-            for (i=0;i<lista.size();i++){
-                boolean mover = lista.get(i)<< x>=0;
+            j=0;
+            for (i=0;i<lista.length;i++){
+                boolean mover = lista[i] << x>=0;
                 
             //Operador Ternario (funciona como una condicion entre valores evaluados)
-            if(x==0 ? !mover:mover){
-                
-                reareglo.add(j, lista.get(i)); 
-                j++;
-            }else{
-                reareglo.add(i-j,lista.get(i));
-                
+                if(x==0 ? !mover:mover){
+                    auxiliar[j] = lista[i]; 
+                    j++;
+                }else{
+                    lista[i-j] = lista[i];   
+                }
             }
+            //Cierre del for1
+            for (i=j;i<auxiliar.length;i++){
+                auxiliar[i] = lista[i-j];
             }
-            for (i=j;i<reareglo.size();i++){
-                reareglo.add(i, lista.get(i-j));
-            }
-            lista = reareglo;
+            lista = auxiliar;
+            listaOrdenada=lista;
         }
      
-        System.out.println("Con cocktail:\n");
-        for (int k = 0; k < lista.size(); k++) {
-            System.out.print(lista.get(k) + ", ");
+        System.out.println("La lista ordenada con Radix:\n");
+        for (int k = 0; k < lista.length; k++) {
+            System.out.print(lista[k] + ", ");
         }
-        
+        return listaOrdenada;
     }
     
     

@@ -62,8 +62,10 @@ public class CocktailSort {
             //Para el recorrido descendente en el cual busca el menor numero y lo coloca a la izquierda
             if(lista.get(k)<lista.get(k-1)){
                 int temp = lista.get(k);
-                int pre = lista.get(k-1);
-                lista.set(pre,temp);
+                lista.add(k, lista.get(k-1));
+                //int pre = lista.get(k-1);
+                //lista.set(pre,temp);
+                lista.add(k-1,temp);
                 ordenado = true;
             }
         }
