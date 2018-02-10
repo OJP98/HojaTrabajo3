@@ -13,13 +13,12 @@ public class GRandom {
     
     ArrayList<Integer> listaDesord = new ArrayList<Integer>();
     ArrayList<Integer> reareglo = new ArrayList<>();
-    int[] listaD = new int[1500];    
-   
-    /**
-     * Esta clase random va a generar los random y luego guardarlos en el que dice
-     * Default Package que tiene un txt llamado datos que luego leera para ordenarlo.
-    */        
+    int[] listaD = new int[3000];      
     
+    /**
+     * Metodo que escribe en el archivo txt.
+     * @param nombre: El nombre del archivo txt
+     */
     public void Escribir(String nombre) {
      //Seccion de definiciones para random
      
@@ -38,10 +37,9 @@ public class GRandom {
             bw = new BufferedWriter(w);
             wr = new PrintWriter(bw);            
             
-            for (int i =0; i<1500; i++){
-		x = rnd.nextInt(1500-0)+0; 
-                wr.println(x);
-		System.out.println(x);
+            for (int i =0; i<3000; i++){
+		x = rnd.nextInt(3000-0)+0; 
+                wr.println(x);		
             }
             
            wr.close();
@@ -51,15 +49,13 @@ public class GRandom {
         catch(Exception e)
         {
             System.err.println("Se produjo un error: " + e);
-        }
-        
-        
+        }                
     }
     
     /**
      * Metodo que lee un archivo txt e ingresa los valores numericos a un arraylist
      * @param numerosDesord: El archivo txt con los numeros
-     * @return
+     * @return: El array de los elementos que contiene el txt
      */
     public int[] leerArchivo(String numerosDesord){                
         
@@ -101,7 +97,7 @@ public class GRandom {
             
         }
         
-        //Seccion de codigo que almaceno los elementos dentro de una cadena String
+        //Seccion de codigo que almacena los elementos dentro de una cadena String
         
         for (int i = 0; i < listaDesord.size(); i++) {
             numeros = (numeros + listaDesord.get(i) + ", ");
@@ -112,7 +108,9 @@ public class GRandom {
     }
         
     /**
-     * Metodo que ordena la lista de enteros de la forma Gnome.
+     * Metodo que ordena la lista de la forma Gnome
+     * @param lista: El array de la lista a ordenar.
+     * @return: la lista ordenada
      */
     public int[] GnomeSort (int[] lista){                
         
@@ -279,10 +277,14 @@ public class GRandom {
         
         resultado = Merge(izq, derecha);
      
-         return lista
-;        
+         return lista;        
     }  
     
+    /**
+     * Metodo que imprime la lista de elementos.
+     * @param lista: La lista de los elementos a imprimir.
+     * @param metodo: El metodo que se utilizo para ordenar la lista
+     */
     public void imprimirLista(int[] lista , String metodo) {
         
         System.out.println("La lista ordenada con " + metodo + " es:\n");
@@ -291,7 +293,12 @@ public class GRandom {
         }
         
     }
-    
+        
+    /**
+     * Metodo que ordena la lista mediante la tecnica cocktail
+     * @param lista: La lista a ordenar
+     * @return: La lista ordenada
+     */
     public int[] ordenadoCocktail(int[] lista){        
     
     //ArrayList<Integer> lista = listaDesord;
@@ -313,7 +320,7 @@ public class GRandom {
                 //lista.set(temp, post);
                 int temp = lista[k];
                 lista[k] = lista [k-1];
-                lista [k-1] =temp;
+                lista [k-1] = temp;
                 ordenado = true;
             }
            }
@@ -341,6 +348,11 @@ public class GRandom {
         return lista;
     }
     
+    /**
+     * Metodo que ordena la lista mediante la tecnica Radix.
+     * @param lista: La lista a ordenar.
+     * @return: La lista ordenada
+     */
     public int[] radixSort(int[] lista){
             
         //Se necesitan en teoria 10 listas, una lista para cada digito y la
